@@ -12,13 +12,13 @@ const createProduct = async (req: Request, res: Response) => {
     const body = req.body; // Extract product data from the request body
 
     // Call the service to create a new product and store the result
-    const result = await productService.createProduct(body);
+    const data = await productService.createProduct(body);
 
     // Send a success response back to the client
     res.send({
       success: true,
       message: 'Product created successfully', // Message indicating successful creation
-      result, // The newly created product
+      data, // The newly created product
     });
   } catch (error) {
     // Handle errors and send a failure response
