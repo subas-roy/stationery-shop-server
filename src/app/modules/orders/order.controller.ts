@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import Product from '../products/product.model';
 import Order from './order.model';
+import { orderService } from './order.service';
 
 const createOrder = async (req: Request, res: Response) => {
   try {
@@ -60,6 +61,33 @@ const createOrder = async (req: Request, res: Response) => {
   }
 };
 
+/**
+ * Controller to calculate total revenue from all orders
+ */
+const calculateRevenue = async (req: Request, res: Response) => {
+  try {
+    // Fetch total revenue from the service
+    const totalRevenue = await orderService.calculateRevenue();
+
+    // Send success response
+    res.status(200).send({
+      message: 'Revenue calculated successfully',
+      status: true,
+      data: {
+        totalRevenue,
+      },
+    });
+  } catch (error) {
+    // Send error response
+    res.status(500).send({
+      message: 'An error occurred while calculating revenue',
+      status: false,
+      error: error.message,
+    });
+  }
+};
+
 export const orderController = {
   createOrder,
+  calculateRevenue,
 };
