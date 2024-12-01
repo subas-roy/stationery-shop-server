@@ -18,6 +18,10 @@ const productSchema = new Schema(
     price: {
       type: Number,
       required: true,
+      validate: {
+        validator: (value: number) => value > 0,
+        message: 'Price must be a positive number',
+      },
     },
     category: {
       type: [String], // Array of strings representing product categories

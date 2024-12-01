@@ -12,10 +12,37 @@ const createProduct = async (payload: IProduct) => {
   return result; // Return the created product document
 };
 
+const getProducts = async () => {
+  const result = await Product.find();
+  return result;
+};
+
+const getSingleProduct = async (id: string) => {
+  const result = await Product.findById(id);
+  return result;
+};
+
+const updateProduct = async (id: string, data: IProduct) => {
+  const result = await Product.findByIdAndUpdate(id, data, {
+    new: true, // get updated data
+  });
+  return result;
+};
+
+const deleteProduct = async (id: string) => {
+  const result = await Product.findByIdAndDelete(id);
+  return result;
+};
+
 /**
  * Exporting product service object
  * - Provides functions related to product management
  */
 export const productService = {
-  createProduct, // Expose the createProduct function for use in other parts of the application
+  createProduct,
+  getProducts,
+  getSingleProduct,
+  updateProduct,
+  deleteProduct,
+  // Expose the createProduct function for use in other parts of the application
 };

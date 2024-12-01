@@ -30,10 +30,90 @@ const createProduct = async (req: Request, res: Response) => {
   }
 };
 
+const getProducts = async (req: Request, res: Response) => {
+  try {
+    const data = await productService.getProducts();
+
+    res.send({
+      success: true,
+      message: 'Products get successfully',
+      data,
+    });
+  } catch (error) {
+    res.send({
+      success: false,
+      message: 'Something went wrong',
+      error,
+    });
+  }
+};
+
+const getSingleProduct = async (req: Request, res: Response) => {
+  try {
+    const productId = req.params.productId;
+    const data = await productService.getSingleProduct(productId);
+
+    res.send({
+      success: true,
+      message: 'Product get successfully',
+      data,
+    });
+  } catch (error) {
+    res.send({
+      success: false,
+      message: 'Something went wrong',
+      error,
+    });
+  }
+};
+
+const updateProduct = async (req: Request, res: Response) => {
+  try {
+    const productId = req.params.productId;
+    const body = req.body;
+    const data = await productService.updateProduct(productId, body);
+
+    res.send({
+      success: true,
+      message: 'Product updated successfully',
+      data,
+    });
+  } catch (error) {
+    res.send({
+      success: false,
+      message: 'Something went wrong',
+      error,
+    });
+  }
+};
+
+const deleteProduct = async (req: Request, res: Response) => {
+  try {
+    const productId = req.params.productId;
+    await productService.deleteProduct(productId);
+
+    res.send({
+      success: true,
+      message: 'Product deleted successfully',
+      data: {},
+    });
+  } catch (error) {
+    res.send({
+      success: false,
+      message: 'Something went wrong',
+      error,
+    });
+  }
+};
+
 /**
  * Exporting the controller object
  * - Contains all the functions for handling product-related HTTP requests
  */
 export const productController = {
   createProduct, // Function to handle product creation
+  getProducts,
+  getSingleProduct,
+  updateProduct,
+  deleteProduct,
 };
