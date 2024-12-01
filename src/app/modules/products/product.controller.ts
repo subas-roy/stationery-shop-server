@@ -25,7 +25,13 @@ const createProduct = async (req: Request, res: Response) => {
     res.send({
       success: false,
       message: 'Something went wrong', // Message indicating failure
-      error, // Include the error details for debugging
+      error: {
+        message: (error as Error).message,
+        stack:
+          process.env.NODE_ENV === 'development'
+            ? (error as Error).stack
+            : undefined, // Include stack trace only in development
+      }, // Include the error details for debugging
     });
   }
 };
