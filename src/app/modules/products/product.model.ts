@@ -33,6 +33,8 @@ const productSchema = new Schema(
     },
     quantity: {
       type: Number, // Field is mandatory
+      required: true,
+      min: [1, 'Quantity must be at least 1'],
     },
     inStock: {
       type: Boolean, // Indicates if the product is in stock

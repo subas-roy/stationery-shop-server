@@ -13,7 +13,6 @@ const orderSchema = new Schema(
         },
         message: '{VALUE} is not a valid email',
       },
-      unique: true,
     },
     product: {
       type: Schema.Types.ObjectId, // Reference to a product in the database

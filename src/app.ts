@@ -27,9 +27,7 @@ app.use('/api/orders', orderRouter);
  * Description: Responds with a numeric value
  */
 app.get('/', (req: Request, res: Response) => {
-  const a: number = 10; // Define a numeric constant `a`
-
-  res.send(a.toString()); // Send the numeric value as a string in the response
+  res.send({ message: 'Welcome to stationery shop management API service' });
 });
 
 // Export the application object for use in other files
